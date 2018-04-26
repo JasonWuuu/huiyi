@@ -21,7 +21,6 @@
 <%
 		RS.MoveNext
 		LOOP
-    Response.Write("中国")
 	RS.CLOSE 
     
 %>
