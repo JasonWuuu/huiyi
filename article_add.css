@@ -119,13 +119,21 @@
     }
 
     .my-editor-container .personalTempContainer {
-        height: 300px;
+        height: 270px;
+       
+
     }
 
-    .my-editor-container .del {
-        position: absolute;
-        left: 100px;
+    
+
+    .ParpersonalTempContainer:hover{
+        display: block;
+        background: rgb(202, 204, 202);
+        padding: 10px;
+        
     }
+
+    
 
     .my-editor-container .glyphicon-trash {
         font-size: 15px;
@@ -148,3 +156,11 @@
             .my-editor-container .editorslide ul li {
                 list-style: none;
             }
+
+.ParpersonalTempContainer{
+    border-top:1px dashed rgb(117, 116, 116);
+    height: 300px;
+}
+.subPersonalTempContainer{
+    height: 10px;
+}

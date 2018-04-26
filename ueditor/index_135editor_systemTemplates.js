@@ -1,12 +1,12 @@
 $(function () {
     var templateCache = {};
-    //ç‚¹å‡»ç³»ç»Ÿæ¨¡æ¿ï¼Œå°†æ¨¡æ¿æ”¾åœ¨å·¦ä¾§æ ·å¼é‡Œ
+    //µã»÷ÏµÍ³Ä£°å£¬½«Ä£°å·ÅÔÚ×ó²àÑùÊ½Àï
     $("[href='#systemTemplates']").click(function () {
 
         if (!$.trim($("#systemTemplates").html())) {
             var url = 'http://www.135editor.com/editor_styles/systemTemplates';
             $.get(url).then(function (data) {
-                templateCache = cacheTemplatesInfo(data); //ç»Ÿè®¡æ‰€æœ‰çš„templateçš„ç›¸å…³ä¿¡æ¯
+                templateCache = cacheTemplatesInfo(data); //Í³¼ÆËùÓĞµÄtemplateµÄÏà¹ØĞÅÏ¢
                 var templateHtml = $(data).find("#system-template-list").html();
                 $("#systemTemplates").html(templateHtml);
             });
@@ -23,7 +23,7 @@ $(function () {
 
     $("#systemTemplates").on("click", ".popup-template-detail>._135editor section._135editor", applyStyleTosystemTemplates);
 
-    //Ueditorç¼–è¾‘å™¨é‡Œé¢é€‰ä¸­å†…å®¹ä¹‹åï¼Œç‚¹å‡»å·¦ä¾§æ ·å¼ï¼Œè¯¥æ ·å¼å°†è¢«åº”ç”¨åœ¨é€‰ä¸­çš„å†…å®¹ä¸Š
+    //Ueditor±à¼­Æ÷ÀïÃæÑ¡ÖĞÄÚÈİÖ®ºó£¬µã»÷×ó²àÑùÊ½£¬¸ÃÑùÊ½½«±»Ó¦ÓÃÔÚÑ¡ÖĞµÄÄÚÈİÉÏ
     function applyStyleTosystemTemplates() {
         var ue = UE.getEditor('editor');
         var range = ue.selection.getRange();
@@ -46,7 +46,7 @@ $(function () {
         ue.execCommand("inserthtml", targetNode.html());
     }
 
-    //åœ¨æ¨¡æ¿ä¸Šå¼¹å‡º ç§’åˆ· æ’å…¥ æŒ‰é’®
+    //ÔÚÄ£°åÉÏµ¯³ö ÃëË¢ ²åÈë °´Å¥
     function popupTemplateOptions() {
         var templateId = $(this).attr("id").split("-")[2];
         var url = "http://www.135editor.com" + templateCache[templateId];
@@ -67,8 +67,8 @@ $(function () {
                     .css("top", 0)
                     .css("left", 0)
                     .css("z-index", 2);
-                var closeTitle = $("<p>æ ·å¼æ¨¡æ¿</p>");
-                var closeContainer = $("<button class='btn'></button>").text("å…³é—­")
+                var closeTitle = $("<p>ÑùÊ½Ä£°å</p>");
+                var closeContainer = $("<button class='btn'></button>").text("¹Ø±Õ")
                     .on("click", function () {
                         templateContainer.remove();
 
@@ -85,7 +85,7 @@ $(function () {
                         margin: '5px 0px',
                         opacity: 1
                     });
-                    //å°†imageä¸­çš„data-srcæ”¹æˆsrc
+                    //½«imageÖĞµÄdata-src¸Ä³Ésrc
                     filterAttr(templateContainerBody$);
 
                     var templateHtml = templateContainerBody$.html();
@@ -109,9 +109,9 @@ $(function () {
                 });
             });
 
-        //ç»™ç§’åˆ· æ’å…¥æŒ‰é’®æ·»åŠ ä¸ªicon ç¾åŒ–æŒ‰é’®
-        var icon_miaoshua = $("<span class='glyphicon glyphicon-edit' aria-hidden='true'>ç§’åˆ·</span>")
-        var icon_charu = $("<span class='glyphicon glyphicon-log-in' aria-hidden='true'>æ’å…¥</span>")
+        //¸øÃëË¢ ²åÈë°´Å¥Ìí¼Ó¸öicon ÃÀ»¯°´Å¥
+        var icon_miaoshua = $("<span class='glyphicon glyphicon-edit' aria-hidden='true'>ÃëË¢</span>")
+        var icon_charu = $("<span class='glyphicon glyphicon-log-in' aria-hidden='true'>²åÈë</span>")
         miaoshua.append(icon_miaoshua);
         charu.append(icon_charu);
         cover.append(miaoshua);
@@ -120,7 +120,7 @@ $(function () {
     }
 
 
-    //éšè— ç§’åˆ· æ’å…¥æŒ‰é’®
+    //Òş²Ø ÃëË¢ ²åÈë°´Å¥
     function hideTemplateOptions() {
         $(this).find(".cover").remove();
     }
@@ -128,10 +128,10 @@ $(function () {
 
 
 
-    //ç»Ÿè®¡æ¨¡æ¿çš„idä¸è¯¥æ¨¡æ¿çš„urlå…³è”å…³ç³»
+    //Í³¼ÆÄ£°åµÄidÓë¸ÃÄ£°åµÄurl¹ØÁª¹ØÏµ
     // eg. <div class="style-list clearfix" id="editor-style-91571">
     // ......
-    //  <a href="/editor_styles/20180103/91571.html" target="_blank">ç”µå½±æ¨é€ æ¨¡æ¿</a>
+    //  <a href="/editor_styles/20180103/91571.html" target="_blank">µçÓ°ÍÆËÍ Ä£°å</a>
     function cacheTemplatesInfo(html) {
         var cache = {};
         $(html).find(".style-list").each(function () {
@@ -142,7 +142,7 @@ $(function () {
         return cache;
     }
 
-    //æŸäº›èŠ‚ç‚¹çš„å±æ€§ä¸è¢«è¯†åˆ«ï¼Œå¯¹è¿™äº›å±æ€§è¿›è¡Œä¿®æ”¹ï¼Œä¼ å…¥çš„äº‹JQuery  object
+    //Ä³Ğ©½ÚµãµÄÊôĞÔ²»±»Ê¶±ğ£¬¶ÔÕâĞ©ÊôĞÔ½øĞĞĞŞ¸Ä£¬´«ÈëµÄÊÂJQuery  object
     function filterAttr(node) {
         node.find("[data-src]").each(function (index, entity) {
             var dataSrc = $(entity).attr("data-src");
@@ -151,29 +151,30 @@ $(function () {
     }
 
 
-    //ç‚¹å‡»ä¸ªäººæ¨¡æ¿ï¼Œå°†æ¨¡æ¿æ”¾åœ¨å·¦ä¾§æ ·å¼é‡Œ
+    //µã»÷¸öÈËÄ£°å£¬½«Ä£°å·ÅÔÚ×ó²àÑùÊ½Àï
     $("[href='#personalTemplates']").click(function () {
 
         if (!$.trim($("#personalTemplates").html())) {
             var url = '/article_template_list.asp?ismine=true';
             $.get(url).then(function (data) {
-                //var html = $.html(data).text();
-                $("#personalTemplates").html(data);
+
+                var target = wrapItemsFromBackend(data);
+                $("#personalTemplates").html(target.html());
             });
 
-            //var dummyHtml = '<div class="personalTempContainer" data-id="1"><section class="_135editor" style="border: 0px none;"><p style="margin: 0">    <br/></p><p style="margin: 0">    <br/></p><p style="margin: 0">    <br/></p><section class="_135editor" style="border: 0px none;">    <section style="padding: 10px">        <section style="width: 100%;text-align: center;">            <section style="width: 160px;margin: 0 auto">                <img src="http://image2.135editor.com/cache/remote/aHR0cHM6Ly9tbWJpei5xbG9nby5jbi9tbWJpel9wbmcvdU4xTElhdjdvSmljNFZlNXZVVWJ5QTl3M21kdXJNbzJrbE1FSXpubVdISjNWNGRGaHFQd1dMQmZKVWVuSWQzNmt4Nm8yODFKRUVyZEI1dWhrbzB4cXFRLzA/d3hfZm10PXBuZw==" style="width: 100%;display: block;" alt="d3hfZm10PXBuZw=="/>            </section>            <section style="display: inline-block;width: auto;padding:0 5px;border: 1px solid #555;color: #555;border-radius: 5px;;line-height: 25px">                <p style="margin: 0">                    æ„¿å¿«ä¹é©±èµ¶ä½ çš„çƒ¦æ¼ï¼Œæ¸©é¦¨éšåè·Ÿä½ å¥”è·‘                </p>            </section>        </section>    </section></section> </div>';
+            //var dummyHtml = '<div class="personalTempContainer" data-id="1"><section class="_135editor" style="border: 0px none;"><p style="margin: 0">    <br/></p><p style="margin: 0">    <br/></p><p style="margin: 0">    <br/></p><section class="_135editor" style="border: 0px none;">    <section style="padding: 10px">        <section style="width: 100%;text-align: center;">            <section style="width: 160px;margin: 0 auto">                <img src="http://image2.135editor.com/cache/remote/aHR0cHM6Ly9tbWJpei5xbG9nby5jbi9tbWJpel9wbmcvdU4xTElhdjdvSmljNFZlNXZVVWJ5QTl3M21kdXJNbzJrbE1FSXpubVdISjNWNGRGaHFQd1dMQmZKVWVuSWQzNmt4Nm8yODFKRUVyZEI1dWhrbzB4cXFRLzA/d3hfZm10PXBuZw==" style="width: 100%;display: block;" alt="d3hfZm10PXBuZw=="/>            </section>            <section style="display: inline-block;width: auto;padding:0 5px;border: 1px solid #555;color: #555;border-radius: 5px;;line-height: 25px">                <p style="margin: 0">                    Ô¸¿ìÀÖÇı¸ÏÄãµÄ·³ÄÕ£¬ÎÂÜ°Ëæºó¸úÄã±¼ÅÜ                </p>            </section>        </section>    </section></section> </div>';
             //$("#personalTemplates").html(dummyHtml);
         }
     }).trigger("click");
-    //ç‚¹å‡»å…¶ä»–æ¨¡æ¿ï¼Œå°†æ¨¡æ¿æ”¾åœ¨å·¦ä¾§æ ·å¼é‡Œ
+    //µã»÷ÆäËûÄ£°å£¬½«Ä£°å·ÅÔÚ×ó²àÑùÊ½Àï
     $("[href='#otherColleagueTemplates']").click(function () {
 
         if (!$.trim($("#otherColleagueTemplates").html())) {
             var url = '/article_template_list.asp';
             $.get(url).then(function (data) {
                 //var html = $.html(data).text();
-               
-                $("#otherColleagueTemplates").html(data);
+                var target = wrapItemsFromBackend(data);
+                $("#otherColleagueTemplates").html(target.html());
             });
         }
     });
@@ -181,28 +182,51 @@ $(function () {
     $("#personalTemplates").on("click", ".personalTempContainer", applyStyleTosystemTemplates);
     $("#otherColleagueTemplates").on("click", ".personalTempContainer", applyStyleTosystemTemplates);
     
-    $("#personalTemplates").on("mouseenter", ".personalTempContainer", showDeleteIcon);
-    $("#personalTemplates").on("mouseleave", ".personalTempContainer", hideDeleteIcon);
+    $("#personalTemplates").on("mouseenter", ".ParpersonalTempContainer", showDeleteIcon);
+    $("#personalTemplates").on("mouseleave", ".ParpersonalTempContainer", hideDeleteIcon);
+
+    $("#otherColleagueTemplates").on("mouseenter", ".ParpersonalTempContainer", showDeleteIcon);
+    $("#otherColleagueTemplates").on("mouseleave", ".ParpersonalTempContainer", hideDeleteIcon);
 
     $("#personalTemplates").on("click", ".glyphicon.glyphicon-trash.del", delTemplate);
+    $("#otherColleagueTemplates").on("click", ".glyphicon.glyphicon-trash.del", delTemplate);
 
 
-    //å½“é¼ æ ‡è¿›å…¥ä¸ªäººæ¨¡æ¿æˆ–è€…åŒäº‹æ¨¡æ¿çš„æ—¶å€™ï¼Œæ˜¾ç¤ºåˆ é™¤æŒ‰é’®
+
+    //µ±Êó±ê½øÈë¸öÈËÄ£°å»òÕßÍ¬ÊÂÄ£°åµÄÊ±ºò£¬ÏÔÊ¾É¾³ı°´Å¥
     function showDeleteIcon(){
-        var divHeight = $(this).height();
-        var icon_del = $("<span class='glyphicon glyphicon-trash del' aria-hidden='true'></span>").css("top",divHeight-5)
-                        .css("left", $(this).width()-10);
+        var divContainer = $("<div class='subPersonalTempContainer' align='right'></div>");
+        var icon_del = $("<span class='glyphicon glyphicon-trash del' aria-hidden='true'></span>").attr("id", $(this).find(".personalTempContainer").attr("data-id"));
+        divContainer.append(icon_del);
 
-        $(this).append(icon_del);
+        $(this).append(divContainer);
     }
+
     function hideDeleteIcon(){
-        $(this).find(".del").remove();
+        $(this).find(".subPersonalTempContainer").remove();
     }
 
     function delTemplate(event){
-        alert("del");
-        event.stopPropagation();//é˜»æ­¢å†’æ³¡
+        var id = $(this).attr("id");
+        var url = '/template_delete.asp?id='+id;
+        $.get(url).then(function (data) {
+            alert("delete succ");
+        });
+
+        event.stopPropagation();//×èÖ¹Ã°Åİ
     }
+
+    function wrapItemsFromBackend(data) {
+        var refineData = "<div>" + data + "</div>";
+                
+        var target = $("<div></div>");
+        $(refineData).find(".personalTempContainer").each(function(){
+            var divContainer = $("<div class='ParpersonalTempContainer'></div>").append($(this));
+            target.append(divContainer);
+        });
+        return target;
+    }
+
 
 });
 

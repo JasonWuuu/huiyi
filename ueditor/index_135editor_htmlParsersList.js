@@ -1,4 +1,4 @@
-//ä¸€é”®æ’ç‰ˆ
+//Ò»¼üÅÅ°æ
 
 $(function () {
     var parseListUrl = "http://www.135editor.com/html_parsers/lists";

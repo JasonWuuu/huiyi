@@ -13,7 +13,7 @@ $(function () {
 
     $(".style-result").on("click", "li", applyStyle);
 
-    //Ueditor缂栬緫鍣ㄩ噷闈㈤�変腑鍐呭涔嬪悗锛岀偣鍑诲乏渚ф牱寮忥紝璇ユ牱寮忓皢琚簲鐢ㄥ湪閫変腑鐨勫唴瀹逛笂
+    //Ueditor编辑器里面选中内容之后，点击左侧样式，该样式将被应用在选中的内容上
     function applyStyle() {
         var ue = UE.getEditor('editor');
         var range = ue.selection.getRange();

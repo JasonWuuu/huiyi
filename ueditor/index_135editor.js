@@ -1,6 +1,6 @@
 $(function () {
 
-    //ä¿å­˜ä¸ºè‰ç¨¿
+    //±£´æÎª²İ¸å
     $("#save-as-draft").on('click', function () {
         var html = UE.getEditor('editor').getContent();
         var url = './article_draft_add.asp';
@@ -12,11 +12,11 @@ $(function () {
                         $("#editor-draft").html(data);
                     }
                 });
-                alert('ä¿å­˜ä¸ºè‰ç¨¿æˆåŠŸï¼');
+                alert('±£´æÎª²İ¸å³É¹¦£¡');
             }
         });
     });
-    //ä¿å­˜ä¸ºæ¨¡æ¿
+    //±£´æÎªÄ£°å
     $("#save-as-template").on('click', function () {
         var html = UE.getEditor('editor').getContent();
         var url = './article_template_add.asp';
@@ -26,7 +26,7 @@ $(function () {
                 $.get(listUrl).then(function (d) {
                     $("#personalTemplates").html(d);
                 });
-                alert('ä¿å­˜ä¸ºæ¨¡æ¿æˆåŠŸï¼');
+                alert('±£´æÎªÄ£°å³É¹¦£¡');
             }
         });
     });

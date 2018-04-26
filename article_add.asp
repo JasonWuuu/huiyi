@@ -279,7 +279,7 @@
     <div class="modal fade docs-cropped" id="myNewStyleEditor" aria-hidden="true" aria-labelledby="getCroppedCanvasTitle"
         role="dialog" tabindex="-1">
         <div class="modal-dialog modal-lg" style="width: 1200px;">
-            <div class="modal-content">
+            <div class="modal-content" >
                 <div class="modal-header">
                     <h5 class="modal-title" id="getCroppedCanvasTitle">±à¼­Æ÷</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -531,6 +531,16 @@
                                                 </div>
                                             </div>
                                             <div role="tabpanel" class="tab-pane pre-scrollable" id="editor-draft" style="max-height: 700px;">
+                                                <ul id="editor-tpls-navtab" class="nav nav-tabs" style="border: 0 none;">
+                                                    <li class="nav-item ignore col-sm-4 active" id="personal-tpl-list-li">
+                                                        <a class="nav-link" href="#personalDraft" data-refresh="always" data-url="" role="tab" data-toggle="tab"
+                                                            aria-selected="true">¸öÈË²Ý¸å</a>
+                                                    </li>
+                                                    
+                                                </ul>
+                                                    <div id="personalDraft" class="tab-pane active " style="max-height: 700px;">
+
+                                                    </div>
                                             </div>
                                         </div>
                                     </div>
