@@ -524,7 +524,7 @@
                                                     <div id="personalTemplates" class="tab-pane active  pre-scrollable" style="max-height: 700px;">
                                                     </div>
                                                     <div id="otherColleagueTemplates" class="tab-pane  pre-scrollable" style="max-height: 700px;">
-                                                        这是其他模板
+                                                        
                                                     </div>
                                                     <div id="systemTemplates" class="tab-pane  pre-scrollable" style="max-height: 700px;">
                                                     </div>

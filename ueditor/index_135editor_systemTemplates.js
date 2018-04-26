@@ -155,25 +155,25 @@ $(function () {
     $("[href='#personalTemplates']").click(function () {
 
         if (!$.trim($("#personalTemplates").html())) {
-            var url = '/template_list.asp?ismine=true';
+            var url = '/article_template_list.asp?ismine=true';
             $.get(url).then(function (data) {
-                var html = $.html(data).text();
-                $("#personalTemplates").html(html);
+                //var html = $.html(data).text();
+                $("#personalTemplates").html(data);
             });
 
-            var dummyHtml = '<div class="personalTempContainer" data-id="1"><section class="_135editor" style="border: 0px none;"><p style="margin: 0">    <br/></p><p style="margin: 0">    <br/></p><p style="margin: 0">    <br/></p><section class="_135editor" style="border: 0px none;">    <section style="padding: 10px">        <section style="width: 100%;text-align: center;">            <section style="width: 160px;margin: 0 auto">                <img src="http://image2.135editor.com/cache/remote/aHR0cHM6Ly9tbWJpei5xbG9nby5jbi9tbWJpel9wbmcvdU4xTElhdjdvSmljNFZlNXZVVWJ5QTl3M21kdXJNbzJrbE1FSXpubVdISjNWNGRGaHFQd1dMQmZKVWVuSWQzNmt4Nm8yODFKRUVyZEI1dWhrbzB4cXFRLzA/d3hfZm10PXBuZw==" style="width: 100%;display: block;" alt="d3hfZm10PXBuZw=="/>            </section>            <section style="display: inline-block;width: auto;padding:0 5px;border: 1px solid #555;color: #555;border-radius: 5px;;line-height: 25px">                <p style="margin: 0">                    愿快乐驱赶你的烦恼，温馨随后跟你奔跑                </p>            </section>        </section>    </section></section> </div>';
-            $("#personalTemplates").html(dummyHtml);
+            //var dummyHtml = '<div class="personalTempContainer" data-id="1"><section class="_135editor" style="border: 0px none;"><p style="margin: 0">    <br/></p><p style="margin: 0">    <br/></p><p style="margin: 0">    <br/></p><section class="_135editor" style="border: 0px none;">    <section style="padding: 10px">        <section style="width: 100%;text-align: center;">            <section style="width: 160px;margin: 0 auto">                <img src="http://image2.135editor.com/cache/remote/aHR0cHM6Ly9tbWJpei5xbG9nby5jbi9tbWJpel9wbmcvdU4xTElhdjdvSmljNFZlNXZVVWJ5QTl3M21kdXJNbzJrbE1FSXpubVdISjNWNGRGaHFQd1dMQmZKVWVuSWQzNmt4Nm8yODFKRUVyZEI1dWhrbzB4cXFRLzA/d3hfZm10PXBuZw==" style="width: 100%;display: block;" alt="d3hfZm10PXBuZw=="/>            </section>            <section style="display: inline-block;width: auto;padding:0 5px;border: 1px solid #555;color: #555;border-radius: 5px;;line-height: 25px">                <p style="margin: 0">                    愿快乐驱赶你的烦恼，温馨随后跟你奔跑                </p>            </section>        </section>    </section></section> </div>';
+            //$("#personalTemplates").html(dummyHtml);
         }
-    });
+    }).trigger("click");
     //点击其他模板，将模板放在左侧样式里
     $("[href='#otherColleagueTemplates']").click(function () {
 
         if (!$.trim($("#otherColleagueTemplates").html())) {
-            var url = '/template_list.asp';
+            var url = '/article_template_list.asp';
             $.get(url).then(function (data) {
-                var html = $.html(data).text();
+                //var html = $.html(data).text();
                
-                $("#otherColleagueTemplates").html(html);
+                $("#otherColleagueTemplates").html(data);
             });
         }
     });

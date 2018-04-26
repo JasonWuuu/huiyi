@@ -22,6 +22,10 @@ $(function () {
         var url = './article_template_add.asp';
         $.post(url, { content: html }, function (data) {
             if (data) {
+                var listUrl = '/article_template_list.asp?ismine=true';
+                $.get(listUrl).then(function (d) {
+                    $("#personalTemplates").html(d);
+                });
                 alert('保存为模板成功！');
             }
         });
