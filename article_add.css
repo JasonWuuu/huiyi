@@ -119,9 +119,8 @@
     }
 
     .my-editor-container .personalTempContainer {
-        height: 270px;
-       
-
+        height: 250px;
+        overflow: hidden;
     }
 
     
@@ -160,6 +159,7 @@
 .ParpersonalTempContainer{
     border-top:1px dashed rgb(117, 116, 116);
     height: 300px;
+    
 }
 .subPersonalTempContainer{
     height: 10px;

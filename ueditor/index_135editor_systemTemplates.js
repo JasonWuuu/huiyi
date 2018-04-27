@@ -1,12 +1,12 @@
 $(function () {
     var templateCache = {};
-    //点击系统模板，将模板放在左侧样式里
+    //???????壬????????????????
     $("[href='#systemTemplates']").click(function () {
 
         if (!$.trim($("#systemTemplates").html())) {
             var url = 'http://www.135editor.com/editor_styles/systemTemplates';
             $.get(url).then(function (data) {
-                templateCache = cacheTemplatesInfo(data); //统计所有的template的相关信息
+                templateCache = cacheTemplatesInfo(data); //??????е?template????????
                 var templateHtml = $(data).find("#system-template-list").html();
                 $("#systemTemplates").html(templateHtml);
             });
@@ -23,7 +23,7 @@ $(function () {
 
     $("#systemTemplates").on("click", ".popup-template-detail>._135editor section._135editor", applyStyleTosystemTemplates);
 
-    //Ueditor编辑器里面选中内容之后，点击左侧样式，该样式将被应用在选中的内容上
+    //Ueditor????????????????????????????????????????????е???????
     function applyStyleTosystemTemplates() {
         var ue = UE.getEditor('editor');
         var range = ue.selection.getRange();
@@ -46,7 +46,7 @@ $(function () {
         ue.execCommand("inserthtml", targetNode.html());
     }
 
-    //在模板上弹出 秒刷 插入 按钮
+    //?????????? ??? ???? ???
     function popupTemplateOptions() {
         var templateId = $(this).attr("id").split("-")[2];
         var url = "http://www.135editor.com" + templateCache[templateId];
@@ -67,8 +67,8 @@ $(function () {
                     .css("top", 0)
                     .css("left", 0)
                     .css("z-index", 2);
-                var closeTitle = $("<p>样式模板</p>");
-                var closeContainer = $("<button class='btn'></button>").text("关闭")
+                var closeTitle = $("<p>??????</p>");
+                var closeContainer = $("<button class='btn'></button>").text("???")
                     .on("click", function () {
                         templateContainer.remove();
 
@@ -85,7 +85,7 @@ $(function () {
                         margin: '5px 0px',
                         opacity: 1
                     });
-                    //将image中的data-src改成src
+                    //??image?е?data-src???src
                     filterAttr(templateContainerBody$);
 
                     var templateHtml = templateContainerBody$.html();
@@ -109,7 +109,7 @@ $(function () {
                 });
             });
 
-        //给秒刷 插入按钮添加个icon 美化按钮
+        //????? ?????????icon ???????
         var icon_miaoshua = $("<span class='glyphicon glyphicon-edit' aria-hidden='true'>秒刷</span>")
         var icon_charu = $("<span class='glyphicon glyphicon-log-in' aria-hidden='true'>插入</span>")
         miaoshua.append(icon_miaoshua);
@@ -119,8 +119,7 @@ $(function () {
         $(this).append(cover);
     }
 
-
-    //隐藏 秒刷 插入按钮
+    //???? ??? ?????
     function hideTemplateOptions() {
         $(this).find(".cover").remove();
     }
@@ -128,10 +127,10 @@ $(function () {
 
 
 
-    //统计模板的id与该模板的url关联关系
+    //???????id???????url???????
     // eg. <div class="style-list clearfix" id="editor-style-91571">
     // ......
-    //  <a href="/editor_styles/20180103/91571.html" target="_blank">电影推送 模板</a>
+    //  <a href="/editor_styles/20180103/91571.html" target="_blank">??????? ???</a>
     function cacheTemplatesInfo(html) {
         var cache = {};
         $(html).find(".style-list").each(function () {
@@ -142,7 +141,7 @@ $(function () {
         return cache;
     }
 
-    //某些节点的属性不被识别，对这些属性进行修改，传入的事JQuery  object
+    //?Щ?????????????????Щ??????????????????JQuery  object
     function filterAttr(node) {
         node.find("[data-src]").each(function (index, entity) {
             var dataSrc = $(entity).attr("data-src");
@@ -151,32 +150,15 @@ $(function () {
     }
 
 
-    //点击个人模板，将模板放在左侧样式里
+    //?????????壬????????????????
     $("[href='#personalTemplates']").click(function () {
 
-        if (!$.trim($("#personalTemplates").html())) {
-            var url = '/article_template_list.asp?ismine=true';
-            $.get(url).then(function (data) {
-
-                var target = wrapItemsFromBackend(data);
-                $("#personalTemplates").html(target.html());
-            });
-
-            //var dummyHtml = '<div class="personalTempContainer" data-id="1"><section class="_135editor" style="border: 0px none;"><p style="margin: 0">    <br/></p><p style="margin: 0">    <br/></p><p style="margin: 0">    <br/></p><section class="_135editor" style="border: 0px none;">    <section style="padding: 10px">        <section style="width: 100%;text-align: center;">            <section style="width: 160px;margin: 0 auto">                <img src="http://image2.135editor.com/cache/remote/aHR0cHM6Ly9tbWJpei5xbG9nby5jbi9tbWJpel9wbmcvdU4xTElhdjdvSmljNFZlNXZVVWJ5QTl3M21kdXJNbzJrbE1FSXpubVdISjNWNGRGaHFQd1dMQmZKVWVuSWQzNmt4Nm8yODFKRUVyZEI1dWhrbzB4cXFRLzA/d3hfZm10PXBuZw==" style="width: 100%;display: block;" alt="d3hfZm10PXBuZw=="/>            </section>            <section style="display: inline-block;width: auto;padding:0 5px;border: 1px solid #555;color: #555;border-radius: 5px;;line-height: 25px">                <p style="margin: 0">                    愿快乐驱赶你的烦恼，温馨随后跟你奔跑                </p>            </section>        </section>    </section></section> </div>';
-            //$("#personalTemplates").html(dummyHtml);
-        }
+        refreshPersonalTemplates();
     }).trigger("click");
-    //点击其他模板，将模板放在左侧样式里
+    //?????????壬????????????????
     $("[href='#otherColleagueTemplates']").click(function () {
 
-        if (!$.trim($("#otherColleagueTemplates").html())) {
-            var url = '/article_template_list.asp';
-            $.get(url).then(function (data) {
-                //var html = $.html(data).text();
-                var target = wrapItemsFromBackend(data);
-                $("#otherColleagueTemplates").html(target.html());
-            });
-        }
+        refreshOtherColleagueTemplates();
     });
 
     $("#personalTemplates").on("click", ".personalTempContainer", applyStyleTosystemTemplates);
@@ -185,15 +167,12 @@ $(function () {
     $("#personalTemplates").on("mouseenter", ".ParpersonalTempContainer", showDeleteIcon);
     $("#personalTemplates").on("mouseleave", ".ParpersonalTempContainer", hideDeleteIcon);
 
-    $("#otherColleagueTemplates").on("mouseenter", ".ParpersonalTempContainer", showDeleteIcon);
-    $("#otherColleagueTemplates").on("mouseleave", ".ParpersonalTempContainer", hideDeleteIcon);
-
     $("#personalTemplates").on("click", ".glyphicon.glyphicon-trash.del", delTemplate);
-    $("#otherColleagueTemplates").on("click", ".glyphicon.glyphicon-trash.del", delTemplate);
 
 
 
-    //当鼠标进入个人模板或者同事模板的时候，显示删除按钮
+
+    //????????????????????????????????????
     function showDeleteIcon(){
         var divContainer = $("<div class='subPersonalTempContainer' align='right'></div>");
         var icon_del = $("<span class='glyphicon glyphicon-trash del' aria-hidden='true'></span>").attr("id", $(this).find(".personalTempContainer").attr("data-id"));
@@ -208,12 +187,38 @@ $(function () {
 
     function delTemplate(event){
         var id = $(this).attr("id");
-        var url = '/template_delete.asp?id='+id;
+        var url = '/article_template_delete.asp?id='+id;
         $.get(url).then(function (data) {
-            alert("delete succ");
+            refreshPersonalTemplates();
         });
 
-        event.stopPropagation();//阻止冒泡
+        event.stopPropagation();
+    }
+
+    function refreshOtherColleagueTemplates(){
+        $("#otherColleagueTemplates").empty();
+        if (!$.trim($("#otherColleagueTemplates").html())) {
+            var url = '/article_template_list.asp';
+            $.get(url).then(function (data) {
+                //var html = $.html(data).text();
+                var target = wrapItemsFromBackend(data);
+                $("#otherColleagueTemplates").html(target.html());
+            });
+        }
+    }
+
+    function refreshPersonalTemplates(){
+        $("#personalTemplates").empty();
+        if (!$.trim($("#personalTemplates").html())) {
+            var url = '/article_template_list.asp?ismine=true';
+            $.get(url).then(function (data) {
+                var target = wrapItemsFromBackend(data);
+                $("#personalTemplates").html(target.html());
+            });
+
+            //var dummyHtml = '<div class="personalTempContainer" data-id="1"><section class="_135editor" style="border: 0px none;"><p style="margin: 0">    <br/></p><p style="margin: 0">    <br/></p><p style="margin: 0">    <br/></p><section class="_135editor" style="border: 0px none;">    <section style="padding: 10px">        <section style="width: 100%;text-align: center;">            <section style="width: 160px;margin: 0 auto">                <img src="http://image2.135editor.com/cache/remote/aHR0cHM6Ly9tbWJpei5xbG9nby5jbi9tbWJpel9wbmcvdU4xTElhdjdvSmljNFZlNXZVVWJ5QTl3M21kdXJNbzJrbE1FSXpubVdISjNWNGRGaHFQd1dMQmZKVWVuSWQzNmt4Nm8yODFKRUVyZEI1dWhrbzB4cXFRLzA/d3hfZm10PXBuZw==" style="width: 100%;display: block;" alt="d3hfZm10PXBuZw=="/>            </section>            <section style="display: inline-block;width: auto;padding:0 5px;border: 1px solid #555;color: #555;border-radius: 5px;;line-height: 25px">                <p style="margin: 0">                    ???????????????????????????                </p>            </section>        </section>    </section></section> </div>';
+            //$("#personalTemplates").html(dummyHtml);
+        }
     }
 
     function wrapItemsFromBackend(data) {
@@ -226,6 +231,15 @@ $(function () {
         });
         return target;
     }
+
+//
+    $("#save-as-template").on('click', function () {
+        var html = UE.getEditor('editor').getContent();
+        var url = './article_template_add.asp';
+        $.post(url, { content: html }, function (data) {
+            refreshPersonalTemplates();
+        });
+    });
 
 
 });

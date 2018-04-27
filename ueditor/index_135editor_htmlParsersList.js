@@ -1,5 +1,4 @@
-//Ò»¼üÅÅ°æ
-
+//??????
 $(function () {
     var parseListUrl = "http://www.135editor.com/html_parsers/lists";
     $.get(parseListUrl).then(function (data) {
