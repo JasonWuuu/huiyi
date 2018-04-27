@@ -50,7 +50,8 @@
     <script src="./ueditor/index_135editor_htmlParsersList.js"></script>
     <script src="./ueditor/index_135editor_systemTemplates.js"></script>
     <script src="./ueditor/index_135editor_draft.js"></script>
-    <script src="./article_add.js"></script>
+    <script src="./js/dom-to-image.js"></script>
+    <script src="./js/article_add.js"></script>
     <link href="./article_add.css" rel="stylesheet">
 </head>
 
@@ -639,7 +640,10 @@
 
     function completeEdit(){
         var html = UE.getEditor("editor").getContent();
-        $("[name='info_desc']").html(html);
+        htmlToImage(html).then(function(data){
+            $("[name='info_desc']").html(data);
             $("#myNewStyleEditor").modal("hide");
+        });
+        
         }
 </script>

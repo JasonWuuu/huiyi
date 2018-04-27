@@ -22,7 +22,7 @@ function sumitImageFile(base64Codes) {
         return new Blob([ab], { type: mime });
     };
 
-    vargetFileExt = function (urlData) {
+    var getFileExt = function (urlData) {
         var arr = urlData.split(',');
         var mime = arr[0].match(/:(.*?);/)[1];
         return mime.replace("image/", "");
