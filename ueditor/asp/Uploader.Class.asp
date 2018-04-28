@@ -152,6 +152,9 @@ Class Uploader
         End If
 
         filename = Right( url, Len(url) - InStrRev(url, "/") )
+     	IF Instr(filename,".")=0 Then
+ 	        filename="myupload.jpeg"
+ 		End if
 
         Set stream = CrawlImage( url )
 

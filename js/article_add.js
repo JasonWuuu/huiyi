@@ -4,6 +4,7 @@ function convertTableToImage(html) {
     var container$ = $("<div></div>").append(html);
 
     container$.find("table").each(function (index, entity) {
+        console.log("存在表格,将转化为图片");
         var flag$ = $('<span class="htmlToImageFlag"></span>');
         flag$.insertBefore(entity);
         var p = domToimage(entity).then(function (img) {
@@ -14,7 +15,8 @@ function convertTableToImage(html) {
     });
 
     return Promise.all(list).then(function () {
-        return container$.html();
+        var convertedHtml = container$.html();
+        return convertedHtml;
     }).catch(function(){
         console.log('表格转图片失败');
     });
@@ -30,7 +32,7 @@ function domToimage(table) {
         .then(function (dataUrl) {
             return sumitImageFile(dataUrl);
         }).then(function (src) {
-            console.log(src);
+            // console.log(src);
             var img = new Image();
             img.src = src;
             var parent2$ = $("<div></div>");
@@ -43,7 +45,7 @@ function domToimage(table) {
         })
         .catch(function (error) {
             node$.remove();
-            console.error('转换图片出错，可能遇到跨域问题!', error);
+            console.error('转换图片出错，可能遇到跨域问题,但仍可继续操作!', error);
             deferred.reject(error);
         });
     return deferred.promise();

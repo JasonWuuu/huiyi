@@ -283,7 +283,7 @@
 
     <!-- Show the cropped image in modal -->
     <div class="modal fade docs-cropped" id="myNewStyleEditor" aria-hidden="true" aria-labelledby="getCroppedCanvasTitle"
-        role="dialog" tabindex="-1">
+        role="dialog" tabindex="-1" style="z-index:500;">
         <div class="modal-dialog modal-lg" style="width: 1200px;">
             <div class="modal-content" >
                 <div class="modal-header">
@@ -645,6 +645,7 @@
     function completeEdit(){
         if($.trim(UE.getEditor("editor").getContentTxt())){
             var html = UE.getEditor("editor").getContent();
+            
             convertTableToImage(html).then(function(data){
                 $("[name='info_desc']").html(data);
                 return data;
@@ -663,7 +664,8 @@
                 });
             }
         else{
-             $("#myNewStyleEditor").modal("hide");
+            alert("编辑器中必须包含文字");
+            $("#myNewStyleEditor").modal("hide");
         }
     }
 
