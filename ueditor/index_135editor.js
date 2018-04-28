@@ -42,7 +42,7 @@ function sumitImageFile(base64Codes) {
 
     //ajax Ã·Ωªform  
     $.ajax({
-        url: window.location.origin + '/ueditor/asp/controller.asp?action=uploadimage',
+        url: '../ueditor/asp/controller.asp?action=uploadimage',
         type: "POST",
         data: formData,
         //dataType: "text",
@@ -54,7 +54,7 @@ function sumitImageFile(base64Codes) {
             if (data) {
                 data = JSON.parse(data);
                 if (data.state == "SUCCESS") {
-                    deferred.resolve(window.location.origin + "/ueditor/asp/" + data.url);
+                    deferred.resolve(window.location.origin + "/manage/ueditor/asp/" + data.url);
                 }
                 else {
                     deferred.reject("error");
