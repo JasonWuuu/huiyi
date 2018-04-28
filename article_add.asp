@@ -179,7 +179,8 @@
             <tr bgcolor="#FFFFFF">
                 <td width="21%" class="main">手机图片：</td>
                 <td width="79%" class="main">
-                    <textarea name="info_file" rows="10" cols="60" class="form-control"></textarea>用#号分开，对应标题
+                    <textarea id="info_file_id" name="info_file" rows="10" cols="60" class="form-control"></textarea>
+                    <button class="btn" type="button" onclick="mutipleCrop()">批量裁剪图片</button>用#号分开，对应标题
 		 <font color="red">制作小的图片200X200的，可以为空</font>
                 </td>
             </tr>
@@ -664,5 +665,36 @@
         else{
              $("#myNewStyleEditor").modal("hide");
         }
+    }
+
+    function mutipleCrop(){
+       var imageUrls= $.trim($("[name='info_file']").val());
+       var imageUrlList=[];
+       if(imageUrls){
+          var arr= imageUrls.split("#");
+          $(arr).each(function(index,entity){
+              if($.trim(entity)){
+                imageUrlList.push(entity);
+              }
+          });
+       }
+
+       if(imageUrlList.length===0){
+            var html = UE.getEditor("editor").getContent();
+            $(html).find("img").each(function(index,entity){
+                var url=$.trim($(entity).attr("src"));
+                //只有内网的图片才可以放进去
+                if(new RegExp(window.location.origin).test(url)){
+                    imageUrlList.push(url);
+                }
+                
+            });
+       }
+
+        var croppedImageUrls=imageUrlList.join("#");
+           $("[name='info_file']").val(croppedImageUrls);
+
+        window.open("crop/home.html","批量裁剪图片","width=1200,height=600");
+    
     }
 </script>
