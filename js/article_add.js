@@ -1,4 +1,4 @@
-function htmlToImage(html) {
+function convertTableToImage(html) {
     var deferred = $.Deferred();
     var list = [];
     var container$ = $("<div></div>").append(html);
@@ -40,7 +40,9 @@ function domToimage(table) {
             deferred.resolve(parent1$.html());
         })
         .catch(function (error) {
-            console.error('oops, something went wrong!', error);
+            node$.remove();
+            console.error('转换图片出错，可能遇到跨域问题!', error);
+            deferred.reject(error);
         });
     return deferred.promise();
 }

@@ -93,14 +93,15 @@
                 return false;
         }
     </script>
-    <div align="center"><font color="#0000FF" class="main">（内部资料系统管理）内容与文章系统增加 </font></div>
+    <div align="center">
+    <h2>（内部资料系统管理）内容与文章系统增加</h2>
     <hr>
     <form method="POST" action="article_save.asp" name="un">
-        <table width="953" border="1" bordercolordark="#99CCFF" bordercolorlight="#99CCFF" cellspacing="1" align="center" cellpadding="6" bgcolor="#000000">
+        <table style="width:953px;" class="table table-bordered">
             <tr bgcolor="#FFFFFF">
                 <td width="21%" class="main">类别：</td>
                 <td width="79%" class="main">
-                    <select name="class_no">
+                    <select name="class_no" class="form-control" style="width:200px;">
                         <%
         SQL = "SELECT * FROM A_CLASS ORDER BY CLASS_NO"
         RS1.OPEN SQL,CONN,1,1
@@ -126,7 +127,7 @@
                 <td width="21%" class="main">资料标题：</td>
                 <td width="79%" class="main">
 
-                    <textarea name="info_title" rows="10" cols="60"></textarea>标题用#号分开
+                    <textarea name="info_title" rows="10" cols="60" class="form-control"></textarea>标题用#号分开
            <input type="radio" name="colorxz" checked value="">
                     正常
              <input type="radio" name="colorxz" value="标红">
@@ -135,25 +136,27 @@
             <tr bgcolor="#FFFFFF">
                 <td width="21%" class="main">副标题（100字以内）：</td>
                 <td width="79%" class="main">
-                    <textarea name="sub_title" rows="4" cols="60"></textarea>
+                    <textarea name="sub_title" rows="4" cols="60" class="form-control"></textarea>
                 </td>
             </tr>
             <tr bgcolor="#FFFFFF">
-                <td width="21%" class="main">简介：</td>
+                <td width="21%" class="main">简介：<br/><font color="red">(如包含外部图片，则显示文本)</font></td>
                 <td width="79%" class="main">
-                    <textarea name="info_desc" rows="10" cols="60"></textarea>
+                    <div style="width:735px;">
+                    <textarea name="info_desc" rows="20" cols="60" class="form-control"></textarea>
+                    </div>
                 </td>
             </tr>
             <tr bgcolor="#FFFFFF">
                 <td width="21%" class="main">视频URL：</td>
                 <td width="79%" class="main">
-                    <input type="text" name="sp_url" size="30">
+                    <input type="text" name="sp_url" size="30" class="form-control">
                 </td>
             </tr>
             <tr bgcolor="#FFFFFF">
                 <td width="21%" class="main">视频外-URL：</td>
                 <td width="79%" class="main">
-                    <input type="text" name="sp_url_out" size="30">
+                    <input type="text" name="sp_url_out" size="30" class="form-control">
                 </td>
             </tr>
             <tr bgcolor="#FFFFFF">
@@ -169,14 +172,14 @@
             <tr bgcolor="#FFFFFF">
                 <td width="21%" class="main">资料来源：</td>
                 <td width="79%" class="main">
-                    <input type="text" name="info_source" size="30">
+                    <input type="text" name="info_source" size="30" class="form-control">
                 </td>
             </tr>
 
             <tr bgcolor="#FFFFFF">
                 <td width="21%" class="main">手机图片：</td>
                 <td width="79%" class="main">
-                    <textarea name="info_file" rows="10" cols="60"></textarea>用#号分开，对应标题
+                    <textarea name="info_file" rows="10" cols="60" class="form-control"></textarea>用#号分开，对应标题
 		 <font color="red">制作小的图片200X200的，可以为空</font>
                 </td>
             </tr>
@@ -269,9 +272,9 @@
                 <td colspan="2">
                     <div align="center">
                         <br>
-                        <input type="submit" name="Submit" value="提交申请" onclick="return checkIn();">
-                        <input type="reset" name="Submit2" value="重填信息">
-                        <input type="button" name="home" value="返    回" onclick="history.back();">
+                        <input type="submit" name="Submit" value="提交申请" onclick="return checkIn();" class="btn btn-primary">
+                        <input type="reset" name="Submit2" value="重填信息" class="btn">
+                        <input type="button" name="home" value="返    回" onclick="history.back();" class="btn">
                     </div>
                 </td>
         </table>
@@ -639,11 +642,27 @@
     });
 
     function completeEdit(){
-        var html = UE.getEditor("editor").getContent();
-        htmlToImage(html).then(function(data){
-            $("[name='info_desc']").html(data);
-            $("#myNewStyleEditor").modal("hide");
-        });
-        
+        if($.trim(UE.getEditor("editor").getContentTxt())){
+            var html = UE.getEditor("editor").getContent();
+            convertTableToImage(html).then(function(data){
+                $("[name='info_desc']").html(data);
+                return data;
+                }).then(function(data){
+                   var htmlImag$= $("<div></div>").css({width:"735px"}).append(data);
+                    return domToimage(htmlImag$[0]);
+                }).then(function(data){
+                    var src=$(data).find("img").attr("src");
+                    $("[name='info_desc']").parent().css({backgroundImage:"url("+ src+")",backgroundRepeat:"no-repeat"});
+                    $("[name='info_desc']").css({opacity:0,cursor:"hand"});
+                    $("#myNewStyleEditor").modal("hide");
+                }).catch(function(){
+                    $("[name='info_desc']").parent().removeAttr("style").css({width:"735px"});
+                    $("[name='info_desc']").css({opacity:1,cursor:"text"});
+                    $("#myNewStyleEditor").modal("hide");
+                });
+            }
+        else{
+             $("#myNewStyleEditor").modal("hide");
         }
+    }
 </script>

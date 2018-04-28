@@ -54,7 +54,7 @@ function sumitImageFile(base64Codes) {
             if (data) {
                 data = JSON.parse(data);
                 if (data.state == "SUCCESS") {
-                    deferred.resolve("/ueditor/asp/" + data.url);
+                    deferred.resolve(window.location.origin + "/ueditor/asp/" + data.url);
                 }
                 else {
                     deferred.reject("error");
