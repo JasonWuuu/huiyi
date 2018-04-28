@@ -15,6 +15,8 @@ function convertTableToImage(html) {
 
     return Promise.all(list).then(function () {
         return container$.html();
+    }).catch(function(){
+        console.log('±í¸ñ×ªÍ¼Æ¬Ê§°Ü');
     });
 }
 
@@ -41,15 +43,15 @@ function domToimage(table) {
         })
         .catch(function (error) {
             node$.remove();
-            console.error('è½¬æ¢å›¾ç‰‡å‡ºé”™ï¼Œå¯èƒ½é‡åˆ°è·¨åŸŸé—®é¢˜!', error);
+            console.error('×ª»»Í¼Æ¬³ö´í£¬¿ÉÄÜÓöµ½¿çÓòÎÊÌâ!', error);
             deferred.reject(error);
         });
     return deferred.promise();
 }
 
-//ä¼ å…¥å›¾ç‰‡è·¯å¾„ï¼Œè¿”å›base64
+//´«ÈëÍ¼Æ¬Â·¾¶£¬·µ»Øbase64
 function getBase64(img) {
-    function getBase64Image(img, width, height) {//widthã€heightè°ƒç”¨æ—¶ä¼ å…¥å…·ä½“åƒç´ å€¼ï¼Œæ§åˆ¶å¤§å° ,ä¸ä¼ åˆ™é»˜è®¤å›¾åƒå¤§å°
+    function getBase64Image(img, width, height) {//width¡¢heightµ÷ÓÃÊ±´«Èë¾ßÌåÏñËØÖµ£¬¿ØÖÆ´óĞ¡ ,²»´«ÔòÄ¬ÈÏÍ¼Ïñ´óĞ¡
         var canvas = document.createElement("canvas");
         canvas.width = width ? width : img.width;
         canvas.height = height ? height : img.height;
@@ -65,8 +67,8 @@ function getBase64(img) {
     var deferred = $.Deferred();
     if (img) {
         image.onload = function () {
-            deferred.resolve(getBase64Image(image));//å°†base64ä¼ ç»™doneä¸Šä¼ å¤„ç†
+            deferred.resolve(getBase64Image(image));//½«base64´«¸ødoneÉÏ´«´¦Àí
         };
-        return deferred.promise();//é—®é¢˜è¦è®©onloadå®Œæˆåå†return sessionStorage['imgTest']
+        return deferred.promise();//ÎÊÌâÒªÈÃonloadÍê³ÉºóÔÙreturn sessionStorage['imgTest']
     }
 }
