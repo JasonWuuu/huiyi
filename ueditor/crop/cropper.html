@@ -33,6 +33,19 @@
     .images img {
         margin: 5px;
     }
+
+    .imageContainer {
+        margin: 5px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        height: 70px;
+        line-height:15px;
+    }
+    .imageContainer button {
+        margin-top: 35px;
+        margin-left: 10px;
+    }
 </style>
 
 <body>
@@ -42,12 +55,31 @@
         <div class="">
             <div class="col-lg-3">
                 <div class="row left-container images" id="croppingImages">
-                    <img class="img-responsive center-block" src="1.jpg" dummyLoc='1' />
-                    <img class="img-responsive center-block" src="3.jpg" dummyLoc='2' />
-                    <img class="img-responsive center-block" src="2.jpeg" dummyLoc='3' />
-                    <img class="img-responsive center-block" src="3.jpg" dummyLoc='4' />
-                    <img class="img-responsive center-block" src="1.jpg" dummyLoc='5' />
-                    <img class="img-responsive center-block" src="1.jpg" dummyLoc='6' />
+                    <div class="imageContainer">
+                            <div><img class="img-responsive center-block" src="1.jpg" dummyLoc='1' /></div>
+                            <div><button class="btn btn-primary">删除</button></div>
+                    </div>
+                    <div class="imageContainer">
+                            <div><img class="img-responsive center-block" src="2.jpeg" dummyLoc='2' /></div>
+                            <div><button class="btn btn-primary">删除</button></div>
+                    </div>
+                    <div class="imageContainer">
+                            <div><img class="img-responsive center-block" src="3.jpg" dummyLoc='3' /></div>
+                            <div><button class="btn btn-primary">删除</button></div>
+                    </div>
+                    <div class="imageContainer">
+                            <div><img class="img-responsive center-block" src="1.jpg" dummyLoc='4' /></div>
+                            <div><button class="btn btn-primary">删除</button></div>
+                    </div>
+                    <div class="imageContainer">
+                            <div><img class="img-responsive center-block" src="1.jpg" dummyLoc='5' /></div>
+                            <div><button class="btn btn-primary">删除</button></div>
+                    </div>
+                    <div class="imageContainer">
+                            <div><img class="img-responsive center-block" src="1.jpg" dummyLoc='6' /></div>
+                            <div><button class="btn btn-primary">删除</button></div>
+                    </div>
+                    
                 </div>
 
             </div>
@@ -379,97 +411,6 @@
     </div>
 </body>
 <script src="./main.js"></script>
-
-<script>
-    var imageIndex=0;
-    function startCrop() {
-        var uploadedImageType = 'image/jpeg';
-        var option = { "maxWidth": 4096, "maxHeight": 4096 };
-        if (uploadedImageType === 'image/jpeg') {
-            if (!option) {
-                option = {};
-            }
-
-            option.fillColor = '#fff';
-        }
-        var $image = $('#image');
-        var result = $image.cropper('getCroppedCanvas', option, null);
-        if (result) {
-            var croppedImageUrl = result.toDataURL(uploadedImageType);
-            console.log('croppedImageUrl', croppedImageUrl);
-            var targetImage = $("[targetImage]").attr("targetImage");
-            var replaceTarget = "[dummyLoc=" + targetImage + "]";
-            // 如果dummyLoc是empty的话，就是用户上传的文件
-            if($.trim(targetImage) == ""){
-                addImage(croppedImageUrl, imageIndex++);
-            }else{
-                $(replaceTarget).attr('src', croppedImageUrl);
-            }
-           
-        }
-    }
-
-    function moveImageToCroppingArea() {
-        imgurl = $(this).attr('src');
-        dummyLoc = $(this).attr('dummyLoc');
-        var $image = $('#image');
-        $image.cropper('destroy').attr('src', imgurl).cropper({});
-        alert(imgurl);
-        $("[targetImage]").attr("targetImage", dummyLoc);
-    }
-
-
-    function addssDummLoc(){
-        // make dummLoc empty
-        $("[targetImage]").attr("targetImage", "");
-        console.log("user upload the file, need add its Dummloc");
-    }
-
-
-    $(".fa.fa-upload").on("click", addssDummLoc);
-    $("#croppingImages").on("click", "img", moveImageToCroppingArea);
-
-
-    function addImage(src, index){
-        //<img class="img-responsive center-block" src="1.jpg" dummyLoc='1' />
-        var dummLoc = "user_" + index;
-        
-        var userUpImg = $("<img class='img-responsive center-block' ></img>").attr("src", src).attr("dummyLoc", dummLoc);
-        console.log(userUpImg);
-        $("#croppingImages").append(userUpImg);
-    }
-
-    function removeImage(){
-
-    }
-
-    function getBlob() {
-        var eleAppend = document.getElementById("errorMsg");
-        //var eleAppend = $("#errorMsg");
-        window.URL = window.URL || window.webkitURL;
-        if (typeof history.pushState == "function") {
-            var xhr = new XMLHttpRequest();
-            xhr.open("get", "http://pic-bucket.nosdn.127.net/photo/0001/2018-04-28/DGFIJ18000AP0001NOS.jpg", true);
-            xhr.responseType = "blob";
-            xhr.onload = function () {
-                if (this.status == 200) {
-                    alert("success");
-                    var blob = this.response;
-                    var img = document.createElement("img");
-                    img.onload = function (e) {
-                        window.URL.revokeObjectURL(img.src); // 清除释放
-                    };
-                    img.src = window.URL.createObjectURL(blob);
-                    eleAppend.appendChild(img);
-                }
-            }
-            xhr.send();
-        } else {
-            eleAppend.innerHTML = '<p style="color:#cd0000;">浏览器不给力</p>';
-            //eleAppend.append($("<p></p>").text("浏览器不给力"));
-        }
-    }
-
-</script>
+<script src="./cropper.js"></script>
 
 </html>
