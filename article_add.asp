@@ -38,20 +38,20 @@
     <script src="https://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
     <link href="https://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
 
-    <script type="text/javascript" charset="utf-8" src="./ueditor/ueditor.config.js"></script>
-    <script type="text/javascript" charset="utf-8" src="./ueditor/ueditor.all.min.js"> </script>
+    <script type="text/javascript" charset="utf-8" src="../ueditor/ueditor.config.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../ueditor/ueditor.all.min.js"> </script>
     <!--建议手动加在语言，避免在ie下有时因为加载语言失败导致编辑器加载失败-->
     <!--这里加载的语言文件会覆盖你在配置项目里添加的语言类型，比如你在配置项目里配置的是英文，这里加载的中文，那最后就是中文-->
-    <script type="text/javascript" charset="utf-8" src="./ueditor/lang/zh-cn/zh-cn.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../ueditor/lang/zh-cn/zh-cn.js"></script>
 
-    <script src="./ueditor/index_ueditor.js"></script>
-    <script src="./ueditor/index_135editor.js"></script>
-    <script src="./ueditor/index_135editor_styles.js"></script>
-    <script src="./ueditor/index_135editor_htmlParsersList.js"></script>
-    <script src="./ueditor/index_135editor_systemTemplates.js"></script>
-    <script src="./ueditor/index_135editor_draft.js"></script>
-    <script src="./js/dom-to-image.js"></script>
-    <script src="./js/article_add.js"></script>
+    <script src="../ueditor/index_ueditor.js"></script>
+    <script src="../ueditor/index_135editor.js"></script>
+    <script src="../ueditor/index_135editor_styles.js"></script>
+    <script src="../ueditor/index_135editor_htmlParsersList.js"></script>
+    <script src="../ueditor/index_135editor_systemTemplates.js"></script>
+    <script src="../ueditor/index_135editor_draft.js"></script>
+    <script src="../js/dom-to-image.js"></script>
+    <script src="../js/article_add.js"></script>
     <link href="./article_add.css" rel="stylesheet">
 </head>
 
@@ -694,7 +694,7 @@
         var croppedImageUrls=imageUrlList.join("#");
            $("[name='info_file']").val(croppedImageUrls);
 
-        window.open("crop/home.html","批量裁剪图片","width=1200,height=600");
+        window.open("../crop/home.html","批量裁剪图片","width=1200,height=600");
     
     }
 </script>

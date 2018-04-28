@@ -7,7 +7,7 @@ html, body, .container, .container>.row {
 }
 
 body {
-    background-image: url(http://ww1.sinaimg.cn/large/65c9d425gw1f7awdjx1asj21hc0u0ab1.jpg);
+    background: linear-gradient(160deg, rgba(74, 206, 211, 0.5), rgba(211, 128, 210, 0.5)) 0% 0% / auto repeat scroll padding-box border-box rgba(0, 0, 0, 0);
     background-size: cover !important;
 }
 

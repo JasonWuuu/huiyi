@@ -34,7 +34,7 @@ $(function () {
 
     function delDraft(event){
         var id = $(this).attr("id");
-        var url = '/article_draft_delete.asp?id='+id;
+        var url = './article_draft_delete.asp?id='+id;
         $.get(url).then(function (data) {
             refreshDraftList();
         });
@@ -43,7 +43,7 @@ $(function () {
     }
 
     function refreshDraftList(){
-        var draftListUrl = '/article_draft_list.asp';
+        var draftListUrl = './article_draft_list.asp';
         $("#personalDraft").empty();
         //if (!$.trim($("#personalDraft").html())) {
             $.get(draftListUrl).then( function (data) {

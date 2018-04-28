@@ -1,12 +1,12 @@
 $(function () {
     var templateCache = {};
-    //???????ÈÉ????????????????
+    //???????ï¿½ï¿½????????????????
     $("[href='#systemTemplates']").click(function () {
 
         if (!$.trim($("#systemTemplates").html())) {
             var url = 'http://www.135editor.com/editor_styles/systemTemplates';
             $.get(url).then(function (data) {
-                templateCache = cacheTemplatesInfo(data); //??????§Ö?template????????
+                templateCache = cacheTemplatesInfo(data); //??????ï¿½ï¿½?template????????
                 var templateHtml = $(data).find("#system-template-list").html();
                 $("#systemTemplates").html(templateHtml);
             });
@@ -23,7 +23,7 @@ $(function () {
 
     $("#systemTemplates").on("click", ".popup-template-detail>._135editor section._135editor", applyStyleTosystemTemplates);
 
-    //Ueditor????????????????????????????????????????????§Ö???????
+    //Ueditor????????????????????????????????????????????ï¿½ï¿½???????
     function applyStyleTosystemTemplates() {
         var ue = UE.getEditor('editor');
         var range = ue.selection.getRange();
@@ -85,7 +85,7 @@ $(function () {
                         margin: '5px 0px',
                         opacity: 1
                     });
-                    //??image?§Ö?data-src???src
+                    //??image?ï¿½ï¿½?data-src???src
                     filterAttr(templateContainerBody$);
 
                     var templateHtml = templateContainerBody$.html();
@@ -110,8 +110,8 @@ $(function () {
             });
 
         //????? ?????????icon ???????
-        var icon_miaoshua = $("<span class='glyphicon glyphicon-edit' aria-hidden='true'>ÃëË¢</span>")
-        var icon_charu = $("<span class='glyphicon glyphicon-log-in' aria-hidden='true'>²åÈë</span>")
+        var icon_miaoshua = $("<span class='glyphicon glyphicon-edit' aria-hidden='true'>ï¿½ï¿½Ë¢</span>")
+        var icon_charu = $("<span class='glyphicon glyphicon-log-in' aria-hidden='true'>ï¿½ï¿½ï¿½ï¿½</span>")
         miaoshua.append(icon_miaoshua);
         charu.append(icon_charu);
         cover.append(miaoshua);
@@ -141,7 +141,7 @@ $(function () {
         return cache;
     }
 
-    //?§»?????????????????§»??????????????????JQuery  object
+    //?ï¿½ï¿½?????????????????ï¿½ï¿½??????????????????JQuery  object
     function filterAttr(node) {
         node.find("[data-src]").each(function (index, entity) {
             var dataSrc = $(entity).attr("data-src");
@@ -150,12 +150,12 @@ $(function () {
     }
 
 
-    //?????????ÈÉ????????????????
+    //?????????ï¿½ï¿½????????????????
     $("[href='#personalTemplates']").click(function () {
 
         refreshPersonalTemplates();
     }).trigger("click");
-    //?????????ÈÉ????????????????
+    //?????????ï¿½ï¿½????????????????
     $("[href='#otherColleagueTemplates']").click(function () {
 
         refreshOtherColleagueTemplates();
@@ -187,7 +187,7 @@ $(function () {
 
     function delTemplate(event){
         var id = $(this).attr("id");
-        var url = '/article_template_delete.asp?id='+id;
+        var url = './article_template_delete.asp?id='+id;
         $.get(url).then(function (data) {
             refreshPersonalTemplates();
         });
@@ -198,7 +198,7 @@ $(function () {
     function refreshOtherColleagueTemplates(){
         $("#otherColleagueTemplates").empty();
         if (!$.trim($("#otherColleagueTemplates").html())) {
-            var url = '/article_template_list.asp';
+            var url = './article_template_list.asp';
             $.get(url).then(function (data) {
                 //var html = $.html(data).text();
                 var target = wrapItemsFromBackend(data);
@@ -210,7 +210,7 @@ $(function () {
     function refreshPersonalTemplates(){
         $("#personalTemplates").empty();
         if (!$.trim($("#personalTemplates").html())) {
-            var url = '/article_template_list.asp?ismine=true';
+            var url = './article_template_list.asp?ismine=true';
             $.get(url).then(function (data) {
                 var target = wrapItemsFromBackend(data);
                 $("#personalTemplates").html(target.html());
