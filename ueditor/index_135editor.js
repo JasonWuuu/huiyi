@@ -22,7 +22,7 @@ function sumitImageFile(base64Codes) {
         return new Blob([ab], { type: mime });
     };
 
-    vargetFileExt = function (urlData) {
+    var getFileExt = function (urlData) {
         var arr = urlData.split(',');
         var mime = arr[0].match(/:(.*?);/)[1];
         return mime.replace("image/", "");
@@ -42,7 +42,7 @@ function sumitImageFile(base64Codes) {
 
     //ajax Ã·Ωªform  
     $.ajax({
-        url: 'http://localhost:8989/ueditor/asp/controller.asp?action=uploadimage',
+        url: window.location.origin + '/ueditor/asp/controller.asp?action=uploadimage',
         type: "POST",
         data: formData,
         //dataType: "text",
@@ -54,7 +54,7 @@ function sumitImageFile(base64Codes) {
             if (data) {
                 data = JSON.parse(data);
                 if (data.state == "SUCCESS") {
-                    deferred.resolve("/ueditor/asp/" + data.url);
+                    deferred.resolve(window.location.origin + "/ueditor/asp/" + data.url);
                 }
                 else {
                     deferred.reject("error");

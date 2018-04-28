@@ -6,12 +6,12 @@
 
 <%
 
-'????×?·????·???????????????????? 
+'去掉字符串头尾的连续的回车和空格 
 function trimVBcrlf(str) 
 trimVBcrlf=rtrimVBcrlf(ltrimVBcrlf(str)) 
 end function 
-    ?
-'????×?·??????·?????????????????? 
+
+'去掉字符串开头的连续的回车和空格 
 function ltrimVBcrlf(str) 
 dim pos,isBlankChar 
 pos=1 
@@ -28,7 +28,7 @@ wend
 ltrimVBcrlf=right(str,len(str)-pos+1) 
 end function 
 
-'????×?·????????????????????????? 
+'去掉字符串末尾的连续的回车和空格 
 function rtrimVBcrlf(str) 
 dim pos,isBlankChar 
 pos=len(str) 
@@ -122,7 +122,7 @@ s_color_r = ""
 			pop = 0
 			pop = instr(s_sp_url,"http")
 			if pop <=0 then
-			response.Write("????URL·?·¨")
+			response.Write("视频URL非法")
 			response.end 
 			end if
 			end if
@@ -131,7 +131,7 @@ s_color_r = ""
 			pop = 0
 			pop = instr(s_sp_url_out,"http")
 			if pop <=0 then
-			response.Write("????URL·?·¨")
+			response.Write("视频URL非法")
 			response.end 
 			end if
 			end if
@@ -167,16 +167,16 @@ For EI = 0 To UBound(EE)
 					SQL = "SELECT TOP 1 * FROM A_ARTICLE WHERE INFO_TITLE = '" & s_info_title & "'"
 				RS.Open SQL,CONN,adOpenKeyset ,adLockReadOnly
 					IF RS.RecordCount >0 THEN
-					Response.Write "?????????????????é????·????????à???à±??????à??±ê??????????????????"
+					Response.Write "记录增加重复，请查看是否已经有相同类别，和相同标题的文章，谢谢配合"
 					Response.End 
 					END IF
 				RS.Close 
 				if s_info_corre = "" then
-				s_info_corre = "??"
+				s_info_corre = "无"
 				end if
 			
 			if s_zhuanti = "" then
-				s_zhunati = "??"
+				s_zhunati = "无"
 				end if
 					WB_FILE_NO = "A" & ID_NAME("INFO_NO")
 					
@@ -186,32 +186,32 @@ For EI = 0 To UBound(EE)
 				ELSE
 				MM = MONTH(DATE)
 				END IF
-'???í??????±ê??
+'处理文章的标题
 
 IF S_SP_URL_OUT <> "" THEN
 		SQL1 = "SELECT TOP 1 * FROM A_CLASS WHERE CLASS_NO='" & S_CLASS_NO & "'"
 		RS1.Open SQL1,CONN,1,1
 			IF RS1.RecordCount>0 THEN
-				S_INFO_TITLE = "??" & RS1("CLASS_NAME") & "?·" & S_INFO_TITLE
+				S_INFO_TITLE = "《" & RS1("CLASS_NAME") & "》" & S_INFO_TITLE
 	
 			END IF
 			RS1.CLOSE 
 END IF
 				
-					'???í×?·?
-					YXTH="<p style='text-indent: 2em; text-align: justify; line-height: 1.5em; margin-bottom: 5px; margin-top: 5px;'>    <span style='color: rgb(0, 0, 0); font-family: ???í????, 'Microsoft YaHei';'><font size='+16'>"
+					'处理字符
+					YXTH="<p style='text-indent: 2em; text-align: justify; line-height: 1.5em; margin-bottom: 5px; margin-top: 5px;'>    <span style='color: rgb(0, 0, 0); font-family: 微软雅黑, 'Microsoft YaHei';'><font size='+16'>"
 					YXTHJW = "</font></span></p>"
-					XTH="<p style='text-indent: 2em; text-align: justify; line-height: 1.5em; margin-bottom: 5px; margin-top: 5px;'>    <span style='color: rgb(0, 0, 0); font-family: ???í????, 'Microsoft YaHei';'>"
+					XTH="<p style='text-indent: 2em; text-align: justify; line-height: 1.5em; margin-bottom: 5px; margin-top: 5px;'>    <span style='color: rgb(0, 0, 0); font-family: 微软雅黑, 'Microsoft YaHei';'>"
 					XTHJW = "</span></p>"
 					QTP="<center><img src='http://img.dakayi.cc/pic/" & year(date) & MM & "/"
 					HTP="' width='100%'/></center>"
-					'????????
+					'增加记录
 					 s_info_desc=replace(s_info_desc,"#TPT#",QTP)
 					 s_info_desc=replace(s_info_desc,"#TPW#",HTP)
 					  s_info_desc=replace(s_info_desc,"#BTT#","<b>")
 					 s_info_desc=replace(s_info_desc,"#BTW#","</b>")
 					 s_info_desc=replace(s_info_desc,"#SPT#","<a href='")
-					 s_info_desc=replace(s_info_desc,"#SPW#","'>???÷?°?ù????????</a>")
+					 s_info_desc=replace(s_info_desc,"#SPW#","'>点击前往观看视频</a>")
 					 s_info_desc=replace(s_info_desc,chr(13),XTHJW & XTH)
 					 s_info_desc = XTH & s_info_desc & XTHJW
 					 
@@ -220,7 +220,7 @@ END IF
 					 s_info_descn=replace(s_info_descn,"#BTT#","<b>")
 					 s_info_descn=replace(s_info_descn,"#BTW#","</b>")
 					 s_info_descn=replace(s_info_descn,"#SPT#","<a href='")
-					 s_info_descn=replace(s_info_descn,"#SPW#","'>???÷?°?ù????????</a>")
+					 s_info_descn=replace(s_info_descn,"#SPW#","'>点击前往观看视频</a>")
 					 s_info_descn=replace(s_info_descn,chr(13),YXTHJW & YXTH)
 					 s_info_descn = YXTH & s_info_descn & YXTHJW
 					 
@@ -236,7 +236,9 @@ END IF
 					RS1("info_descn") = s_info_descn
 	  				RS1("info_find") = "NO"
 	  				'RS1("INFO_FILE") = s_info_file
-					  RS1("INFO_FILE") = YEAR(DATE) & MM & "/" & FF(EI)
+					'change by wucong, we will use full path
+					'RS1("INFO_FILE") = YEAR(DATE) & MM & "/" & FF(EI)
+					RS1("INFO_FILE") = FF(EI)
 						RS1("SP_URL") = s_sp_url
 						RS1("SP_URL_OUT") = s_sp_url_out
 	  				'RS1("info_corre") = s_info_corre
@@ -255,7 +257,7 @@ END IF
 						RS1("RE_DATE") = DATE() + EI & " " & TIME
 	  				RS1.UpdateBatch 
 	  				RS1.Close 
-	  				'???í?à??????
+	  				'处理相关信息
 					
 					SQL = "DELETE FROM D_CORRE WHERE INFO_NO = '" & WB_FILE_NO & "'"
 					CONN.Execute(SQL)
@@ -337,10 +339,10 @@ END IF
 								XGNR = XGNR & RS("HS_NO") & "-"
 								END IF
 						END IF
-					A = Split(RS("ALICE_NAME"), "??")
+					A = Split(RS("ALICE_NAME"), "、")
 					
 							FOR I = 0 TO UBOUND(A)
-								IF A(I) <> "??" THEN
+								IF A(I) <> "无" THEN
 									POP = 0
 									POP = INSTR(MYDESC,A(I))
 									IF POP  >0 THEN
@@ -369,7 +371,7 @@ NEXT
 %>
 <html>
 <head>
-<title>??????????????????</title>
+<title>内容与文章增加成功</title>
 <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
 <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
 <link rel="stylesheet" href="font.css">
@@ -381,12 +383,12 @@ NEXT
 </head>
 
 <body bgcolor="white">
-<div align="center"><font color="#0000FF" class="main">?¨????×??????????í???????????????????? </font></div>
+<div align="center"><font color="#0000FF" class="main">（内部资料系统管理）内容与文章系统增加 </font></div>
 <hr>
 <form method="POST" action="article_main.asp" name="un" >
   <table width="580" border="0" bordercolordark="#99CCFF" bordercolorlight="#99CCFF" cellspacing="1" align="center" cellpadding="6" bgcolor="#000000">
     <tr bgcolor="#FFFFFF"> 
-      <td width="32%" class="main">?à±???</td>
+      <td width="32%" class="main">类别：</td>
       <td width="68%" class="main"> 
           <%=DISPLAY_NAME("A_CLASS",s_class_no,"CLASS_NO","CLASS_NAME")
         %> 
@@ -395,23 +397,24 @@ NEXT
     </tr>
     
     <tr bgcolor="#FFFFFF"> 
-      <td width="32%" class="main">×???±ê????</td>
+      <td width="32%" class="main">资料标题：</td>
       <td width="68%" class="main">
       <%=s_info_title%>
        </td>
     </tr>
 	 <tr bgcolor="#FFFFFF"> 
-      <td width="32%" class="main">?±±ê????</td>
+      <td width="32%" class="main">副标题：</td>
       <td width="68%" class="main">
       <%=s_sub_title%>
        </td>
     </tr>
     <tr bgcolor="#FFFFFF"> 
-      <td width="32%" class="main">?ò?é??</td>
+      <td width="32%" class="main">简介：</td>
       <td width="68%" class="main"> 
-		  <img src="http://img.dakayi.cc/pic/<%=rs("info_file")%>" width="640px">
+		  '<img src="http://img.dakayi.cc/pic/<%=rs("info_file")%>" width="640px">
+		  img src="<%=rs("info_file")%>" width="640px">
 		<%
-		IF s_if_html = "??" THEN
+		IF s_if_html = "是" THEN
 		Response.Write s_info_desc
 		ELSE
 		%>&nbsp;&nbsp;&nbsp;&nbsp;
@@ -423,54 +426,55 @@ NEXT
       </td>
     </tr>
 	  <tr bgcolor="#FFFFFF">
-      <td width="32%" class="main">????URL??</td>
+      <td width="32%" class="main">视频URL：</td>
       <td width="68%" class="main">
       <%=s_sp_url%>
         
       </td>
     </tr>
 	 <tr bgcolor="#FFFFFF">
-      <td width="32%" class="main">??????URL??</td>
+      <td width="32%" class="main">视频外URL：</td>
       <td width="68%" class="main">
       <%=s_sp_url_out%>
         
       </td>
     </tr>
       <tr bgcolor="#FFFFFF">
-      <td width="32%" class="main">?é??×?·?????</td>
+      <td width="32%" class="main">查找字符串：</td>
       <td width="68%" class="main">
       <%=s_info_find%>
         
       </td>
     </tr>
 	  <tr bgcolor="#FFFFFF">
-      <td width="32%" class="main">?à??×?·?????</td>
+      <td width="32%" class="main">相关字符串：</td>
       <td width="68%" class="main">
       <%=s_info_corre%>
         
       </td>
     </tr>
     <tr bgcolor="#FFFFFF"> 
-      <td width="32%" class="main">?à???é??×?·???</td>
+      <td width="32%" class="main">相关查询字符：</td>
       <td width="68%" class="main"><small> 
       <%=s_info_corre%>
         </td>
     </tr>
     <tr bgcolor="#FFFFFF"> 
-      <td width="32%" class="main">×?????????</td>
+      <td width="32%" class="main">资料来源：</td>
       <td width="68%" class="main"> 
       <%=s_info_source%>
         
       </td>
     </tr>
     <tr bgcolor="#FFFFFF"> 
-      <td width="21%" class="main">???ú??????</td>
+      <td width="21%" class="main">手机图片：</td>
       <td width="79%" class="main"> 
-		 <img src="http://img.dakayi.cc/pic/<%=s_info_file%>">
+		 '<img src="http://img.dakayi.cc/pic/<%=s_info_file%>">
+		 <img src="<%=s_info_file%>">
        </td>
     </tr>
    <tr bgcolor="#FFFFFF"> 
-      <td width="21%" class="main">?à????????</td>
+      <td width="21%" class="main">相关栏目：</td>
       <td width="79%" class="main"> 
 		 <%
 			SQL = "SELECT * FROM A_CLASS ORDER BY CLASS_NO"
@@ -489,7 +493,7 @@ NEXT
        </td>
 		 </tr>
 		 <tr bgcolor="#FFFFFF"> 
-      <td width="21%" class="main">?ù??×¨????</td>
+      <td width="21%" class="main">所属专题：</td>
       <td width="79%" class="main"> 
 		 <%
 			SQL = "SELECT * FROM A_ZHUANTI ORDER BY NUM"
@@ -508,14 +512,14 @@ NEXT
        </td>
 		 </tr>
 		  <tr bgcolor="#FFFFFF"> 
-      <td width="32%" class="main">??·?±??ü??</td>
+      <td width="32%" class="main">是否备忘：</td>
       <td width="68%" class="main"> 
       <%=s_if_bw%>
         
       </td>
     </tr>
 	  <tr bgcolor="#FFFFFF"> 
-      <td width="32%" class="main">??·???????</td>
+      <td width="32%" class="main">是否推荐：</td>
       <td width="68%" class="main"> 
       <%=s_if_tj%>
         
@@ -523,25 +527,25 @@ NEXT
     </tr>
 	 </tr>
 	  <tr bgcolor="#FFFFFF"> 
-      <td width="32%" class="main">???????·??</td>
+      <td width="32%" class="main">推广地址：</td>
       <td width="68%" class="main"> 
      http://www.dakayi.cc/article/X<%=WB_FILE_NO%>.html
         
       </td>
     </tr>
 	 <tr bgcolor="#FFFFFF"> 
-	 <td width="32%" class="main">????????:</td>
+	 <td width="32%" class="main">现在推广:</td>
       <td width="68%" class="main"> 
-      <a href="http://zhanzhang.baidu.com/linksubmit/url" target='_blank'>?ò??°???????</a> ?¨?????????????·?????á????
+      <a href="http://zhanzhang.baidu.com/linksubmit/url" target='_blank'>打开百度推广</a> （复制上面的网址进行提交）
         
       </td>
     </tr>
     <tr bgcolor="#FFFFFF"> 
       <td colspan="2"> 
         <div align="center"><br>
-          <input type="submit" name="add" value="?????ê??">
-          <input type="submit" name="home" value="·????÷??">
-          <input type="submit" name="search" value="?????é??">
+          <input type="submit" name="add" value="继续申请">
+          <input type="submit" name="home" value="返回主页">
+          <input type="submit" name="search" value="进入查询">
         </div>
       </td>
   </table>
