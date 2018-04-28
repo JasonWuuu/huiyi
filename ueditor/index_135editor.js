@@ -1,5 +1,5 @@
 /**  
- * 通过ueditor将base64图片提交到服务器,依赖jquery
+ * 通过ueditor将base64图片提交到服务器,依赖jquery.
  * var base64str = "data:image/png;base64,/9j/4AAQSkZJRg................ABAQAAAQABAAD/2wBDAAMCAgICOK//Z";
  * sumitImageFile(base64str).then(function (data) {
  *     console.log(data);
