@@ -54,6 +54,7 @@ $(function () {
         var cover = $("<div></div>").css("background-color", "gray")
             .css("position", "absolute")
             .css("top", "0px")
+            .css("left", "0px")
             .css("z-index", 1)
             .addClass("btn-group-vertical")
             .addClass("cover");
@@ -64,11 +65,11 @@ $(function () {
                     .addClass("tab-pane active popup-template-detail")
                     .css("background-color", "white")
                     .css("position", "absolute")
-                    .css("top", 0)
-                    .css("left", 0)
+                    .css("top", "0px")
+                    .css("left", "0px")
                     .css("z-index", 2);
-                var closeTitle = $("<p>??????</p>");
-                var closeContainer = $("<button class='btn'></button>").text("???")
+                var closeTitle = $("<p>Ä£°åÁÐ±í</p>");
+                var closeContainer = $("<button class='btn'></button>").text("¹Ø±Õ")
                     .on("click", function () {
                         templateContainer.remove();
 
@@ -110,8 +111,8 @@ $(function () {
             });
 
         //????? ?????????icon ???????
-        var icon_miaoshua = $("<span class='glyphicon glyphicon-edit' aria-hidden='true'>ï¿½ï¿½Ë¢</span>")
-        var icon_charu = $("<span class='glyphicon glyphicon-log-in' aria-hidden='true'>ï¿½ï¿½ï¿½ï¿½</span>")
+        var icon_miaoshua = $("<span class='glyphicon glyphicon-edit' aria-hidden='true'>ÃëË¢</span>")
+        var icon_charu = $("<span class='glyphicon glyphicon-log-in' aria-hidden='true'>²åÈë</span>")
         miaoshua.append(icon_miaoshua);
         charu.append(icon_charu);
         cover.append(miaoshua);
