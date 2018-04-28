@@ -42,7 +42,7 @@ function sumitImageFile(base64Codes) {
 
     //ajax Ã·Ωªform  
     $.ajax({
-        url: 'http://localhost:8989/ueditor/asp/controller.asp?action=uploadimage',
+        url: window.location.origin + '/ueditor/asp/controller.asp?action=uploadimage',
         type: "POST",
         data: formData,
         //dataType: "text",
