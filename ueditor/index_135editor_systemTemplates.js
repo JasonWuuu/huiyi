@@ -68,7 +68,7 @@ $(function () {
                     .css("top", "0px")
                     .css("left", "0px")
                     .css("z-index", 2);
-                var closeTitle = $("<p>????б?</p>");
+                var closeTitle = $("<p>???????</p>");
                 var closeContainer = $("<button class='btn'></button>").text("???")
                     .on("click", function () {
                         templateContainer.remove();
@@ -111,8 +111,8 @@ $(function () {
             });
 
         //????? ?????????icon ???????
-        var icon_miaoshua = $("<span class='glyphicon glyphicon-edit' aria-hidden='true'>???</span>")
-        var icon_charu = $("<span class='glyphicon glyphicon-log-in' aria-hidden='true'>????</span>")
+        var icon_miaoshua = $("<span class='glyphicon glyphicon-edit' aria-hidden='true'>秒刷</span>")
+        var icon_charu = $("<span class='glyphicon glyphicon-log-in' aria-hidden='true'>插入</span>")
         miaoshua.append(icon_miaoshua);
         charu.append(icon_charu);
         cover.append(miaoshua);
@@ -238,7 +238,7 @@ $(function () {
         var html = UE.getEditor('editor').getContent();
         var url = './article_template_add.asp';
         $.post(url, { content: html }, function (data) {
-            alert("保存模板成功！");
+            alert("保存模板成功");
             refreshPersonalTemplates();
         });
     });
