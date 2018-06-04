@@ -159,3 +159,13 @@
 .subPersonalTempContainer {
     height: 10px;
 }
+
+.categorydivs {
+    background: rgb(108, 19, 224);
+}
+
+.list-group-item:hover {
+  color: #555;
+  text-decoration: none;
+  background-color: #56a5e6;
+}

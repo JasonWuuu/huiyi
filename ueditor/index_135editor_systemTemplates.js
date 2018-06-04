@@ -1,4 +1,5 @@
 $(function () {
+    
     var templateCache = {};
     //?????????????????????????
     $("[href='#systemTemplates']").click(function () {
@@ -168,6 +169,9 @@ $(function () {
     $("#personalTemplates").on("mouseenter", ".ParpersonalTempContainer", showDeleteIcon);
     $("#personalTemplates").on("mouseleave", ".ParpersonalTempContainer", hideDeleteIcon);
 
+    $("#personalTemplates").on("click", "li", refreshTemplateByCategory);
+    $("#otherColleagueTemplates").on("click", "li", refreshOtherTemplateByCategory);
+
     $("#personalTemplates").on("click", ".glyphicon.glyphicon-trash.del", delTemplate);
 
 
@@ -196,22 +200,37 @@ $(function () {
         event.stopPropagation();
     }
 
-    function refreshOtherColleagueTemplates(){
-        $("#otherColleagueTemplates").empty();
-        if (!$.trim($("#otherColleagueTemplates").html())) {
-            var url = './article_template_list.asp';
+    function refreshOtherColleagueTemplates(category){
+
+        $("#otherColleagueTemplates > .ParpersonalTempContainer").empty();
+        if (!$.trim($("#otherColleagueTemplates > .ParpersonalTempContainer").html())) {
+            var url="";
+            if(category){
+                url = './article_template_list.asp';
+                alert("has category" + url);
+            }
+            else{
+                
+                url = './article_template_list.asp';
+                alert(url);
+            }
             $.get(url).then(function (data) {
                 //var html = $.html(data).text();
                 var target = wrapItemsFromBackend(data);
-                $("#otherColleagueTemplates").html(target.html());
+                $("#otherColleagueTemplates > .ParpersonalTempContainer").html(target.html());
             });
         }
     }
 
-    function refreshPersonalTemplates(){
-        $("#personalTemplates").empty();
-        if (!$.trim($("#personalTemplates").html())) {
-            var url = './article_template_list.asp?ismine=true';
+    function refreshPersonalTemplates(category){
+        $("#personalTemplates > div").empty();
+        if (!$.trim($("#personalTemplates > div").html())) {
+            var url="";
+            if(category){
+                url = './article_template_list.asp?ismine=true';
+            }else{
+                url = './article_template_list.asp?ismine=true';
+            }
             $.get(url).then(function (data) {
                 var target = wrapItemsFromBackend(data);
                 $("#personalTemplates").html(target.html());
@@ -222,10 +241,36 @@ $(function () {
         }
     }
 
+    function refreshTemplateByCategory(){
+        $('ul.categorydivs > li.list-group-item').removeClass('active');
+        $(this).addClass("active");
+
+        refreshPersonalTemplates($(this).text());
+    }
+
+    function refreshOtherTemplateByCategory(){
+        $('ul.categorydivs > li.list-group-item').removeClass('active');
+        $(this).addClass("active");
+        refreshOtherColleagueTemplates($(this).text());
+    }
+
+    function addTemplateCagegory(){
+        var templateCategory=["金银牌VIP", "独家视点", "市场快报", "国际热点", "上市公司", "其他"];     
+        
+        var categorydivs = $("<ul class='list-inline list-group categorydivs'></ul>");
+        $.each(templateCategory, function(index, data){
+            var categoryDiv = $("<li class='list-group-item'></li>").text(data);
+            categorydivs.append(categoryDiv);
+        });
+
+        return categorydivs;
+    }
+
     function wrapItemsFromBackend(data) {
         var refineData = "<div>" + data + "</div>";
-                
         var target = $("<div></div>");
+        var categorydivs = addTemplateCagegory();
+        target.append(categorydivs);
         $(refineData).find(".personalTempContainer").each(function(){
             var divContainer = $("<div class='ParpersonalTempContainer'></div>").append($(this));
             target.append(divContainer);
